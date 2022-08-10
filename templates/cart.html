@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn {
+          background-color: DodgerBlue;
+          border: none;
+          color: white;
+          padding: 12px 16px;
+          font-size: 16px;
+          cursor: pointer;
+          float: center
+        }
+        
+        /* Darker background on mouse-over */
+        .btn:hover {
+          background-color: RoyalBlue;
+        }
+        </style>
+</head>
+<body>
+    <center><h3>Cart</h3></center>
+    
+
+    <a href="{% url 'home' %}"><button class="btn"><i class="fa fa-home"></i> Home</button></a>
+  
+    <table border="5px">
+   
+        <tr>
+            <th>productname</th>
+            <th>productprice</th>
+            <th>Quantity</th>
+            <th>Decrement</th>
+            <th>Increase</th>
+            <th>Delete</th>
+            <th>Price</th>
+        </tr>
+        {% for i in ci %}
+             <tr>
+                 <td>{{i.prodt.name}}</td>
+                 <td>{{i.prodt.price}}</td>
+                 <td>{{i.quan}}</td>
+                 <td><a href="{% url 'dec_cart' i.prodt.id %}"><i style="font-size:24px" class="fa">&#xf146;</i></a></td>
+                 <td><a href="{% url 'addcart' i.prodt.id%}"><i style="font-size:24px" class="fa">&#xf067;</i></a></td>
+                 <td><a href="{% url 'del_cart' i.prodt.id %}"><i style="font-size:24px" class="fa">&#xf014;</i></a></td>
+                 <td>price: {{i.total}}</td>
+                 
+             </tr>
+         {% endfor %}
+         <tr>
+             <th>Total:{{t}}</th>
+         </tr>    
+     </table>
+             
+    
+</body>
+</html>

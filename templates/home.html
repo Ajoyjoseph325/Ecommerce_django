@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <h1><u><center>Ecommerce App</center></u></h1><h3><a href="{% url 'cartpage' %}"><button style="font-size:24px">Cart<i class="fa fa-shopping-cart"></i></button></a></h3>
+    <form action="{% url 'searching' %}" method="get">
+        <input  type="text" name="q" placeholder="Search..">
+        <input type="submit"  value="search">
+
+    </form>
+    
+    <a href="{% url 'home'%}">Home</a>
+    <h3><u>Categorys available</u></h3>
+    {% for i in category %}
+    <h2><a href="{{i.get_url}}">{{i.name}}</a></h2><br>
+    
+    {% endfor %}
+    
+    <h3><u>products<u></h3>
+    {% for i in pg.object_list %}
+    
+    <h2><label>{{i.id}}.</label>{{i.name}}</h2><br>
+    <a href="{{i.get_url}}">Details</a>
+    {% endfor %}
+    <center>
+        {% for p in pg.paginator.page_range %}
+            <a href="?page={{p}}" class="btn btn-light btn-sm{% if pg.number == p %} activate {% endif %}">{{p}}</a>
+        {% endfor %}
+    </center>
+    
+</body>
+</html>

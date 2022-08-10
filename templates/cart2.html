@@ -1,0 +1,65 @@
+
+{% load static %}
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box-element">
+
+				<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190; Continue Shopping</a>
+
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>Items: <strong>{{cn}}</strong></h5></th>
+						<th><h5>Total:<strong> ${{t|floatformat:2}}</strong></h5></th>
+						<th>
+							<a  style="float:right; margin:5px;" class="btn btn-success" href="">Checkout</a>
+						</th>
+					</tr>
+				</table>
+
+			</div>
+
+			<br>
+			<div class="box-element">
+				<div class="cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:2"><strong>Item</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+					<div style="flex:1"><strong>Quantity</strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+				</div>
+				{% for i in ci %}
+			
+					<div class="cart-row">
+						<div style="flex:2"><img class="row-image" src="{{i.prodt.img.url}}"></div>
+						<div style="flex:2"><p>{{i.prodt.name}}</p></div>
+						<div style="flex:1"><p>${{i.prodt.price|floatformat:2}}</p></div>
+						<div style="flex:1">
+							<p class="quantity">{{i.quan}}</p>
+							<div class="quantity">
+								<a href="{% url 'addcart' i.prodt.id%}"><img  class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}"></a>
+								<a href="{% url 'dec_cart' i.prodt.id %}"><img class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}"></a>
+								
+											
+							</div>
+						</div>
+						<div style="flex:1"><p>${{i.total|floatformat:2}}</p></div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</body>
+
