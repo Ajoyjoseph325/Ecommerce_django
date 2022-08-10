@@ -40,6 +40,12 @@
 					<div style="flex:1"><strong>Quantity</strong></div>
 					<div style="flex:1"><strong>Total</strong></div>
 				</div>
+				{% if 'login' not in request.session%}
+					<script LANGUAGE='JavaScript'>
+						window.alert('Login to continue');
+						window.location.href='http://127.0.0.1:8000/';
+					</script>
+					{% endif %}
 				{% for i in ci %}
 			
 					<div class="cart-row">

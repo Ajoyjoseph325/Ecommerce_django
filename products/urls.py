@@ -19,6 +19,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
 from categoryz import views
+from accounts import urls
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -27,8 +28,8 @@ urlpatterns = [
     path('',views.home,name='home'),
     path('<slug:c_slug>/',views.home,name='cat_list'),
     path('<slug:c_slug>/<slug:product_slug>',views.proddetails,name='proddetails'),
-    path('search/?q',views.searching,name='searching')
-    
+    path('search/?q',views.searching,name='searching'),
+    path('accounts/',include('accounts.urls'))
 
     
 ]
