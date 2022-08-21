@@ -3,25 +3,30 @@ from django.contrib import messages
 
 from . models import *
 from categoryz.models import *
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 def c_id(request):
-
-    ct_id=request.session.session_key
-    if not ct_id:
-        ct_id=request.session.create()
-    return ct_id
+        if 'user' not in request.session:
+            messages.warning(request, 'Chat Deleted')
+            return redirect('/')
+        else:
+            ct_id = request.session['user']
+            
+            return ct_id
 def cart_details(request,tot=0,count=0,ct_items=None):
-        try:
-            ct=cartlist.objects.get(cart_id=c_id(request))
-            ct_items=items.objects.filter(cart=ct,active=True)
-            for i in ct_items:
-                tot +=(i.prodt.price*i.quan)
-                count+=i.quan
-        except:
-            pass      
+    if 'user' not in request.session:
+        return redirect('/')
+    try:
+        ct=cartlist.objects.get(cart_id=c_id(request))
+        ct_items=items.objects.filter(cart=ct,active=True)
+        for i in ct_items:
+            tot +=(i.prodt.price*i.quan)
+            count+=i.quan
+    except:
+        pass      
+
     
-       
-        return render(request,"cart2.html",{'ci':ct_items,'t':tot,'cn':count})
+    return render(request,"cart2.html",{'ci':ct_items,'t':tot,'cn':count})
 def add_cart(request,product_id):
    prod=products.objects.get(id=product_id)
    try:

@@ -3,6 +3,9 @@
 <html>
 
 <head>
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 <style>
 .categ:link, a:visited {
   background-color: white;
@@ -77,6 +80,22 @@ https://templatemo.com/tm-539-simple-house
 				</div>
 			</div>
 		</div>
+{% for message in messages %}
+		
+
+{% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+<script>
+  alertify.alert('Alert', 'Log in to purchase !!');
+</script>
+
+{% endif %}
+
+
+
+
+
+	  
+{% endfor %} 
 
 		<main>
 			<header class="row tm-welcome-section">
